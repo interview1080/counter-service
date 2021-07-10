@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: counter-app-deployment
+  labels:
+    app: counter-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: counter-app
+  template:
+    metadata:
+      labels:
+        app: counter-app
+    spec:
+      containers:
+        - name: counter-app
+          image: 105831532584.dkr.ecr.eu-central-1.amazonaws.com/counter-repo:latest
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - mountPath: "/app/data"
+              name: counter-app-data
+      volumes:
+        - name: counter-app-data
+          persistentVolumeClaim:
+            claimName: counter-app-pvc
