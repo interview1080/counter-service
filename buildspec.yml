@@ -9,7 +9,7 @@ phases:
       - $(aws ecr get-login --region eu-central-1 --no-include-email)
       - REPOSITORY_URI=105831532584.dkr.ecr.eu-central-1.amazonaws.com/counter-repo
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
+      - IMAGE_TAG=$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print substr($2,0,5)}')
   build:
     commands:
       - echo Build started on `date`
