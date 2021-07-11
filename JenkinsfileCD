@@ -1,0 +1,22 @@
+pipeline {
+    agent any
+        stages {
+           stage('Clone gitrepo') {
+	      steps {
+		     git branch: 'dev',
+			credentialsId: 'interview1080',
+			url: 'https://github.com/interview1080/counter-service.git'
+			sh "ls -lat"
+		   }
+		}
+            stage('Kubernetes deployment') {
+                steps {
+                    withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'kubeconfig', namespace: '', serverUrl: '') {
+                        sh 'kubectl apply -f k8s/counter-app-pvc.yaml'
+                        sh 'kubectl apply -f k8s/counter-app-deployment.yaml'
+                        sh 'kubectl apply -f k8s/counter-app-service.yaml'
+                    }
+                }
+            }
+        }
+}
