@@ -18,7 +18,7 @@ spec:
         - name: counter-app
           image: interview1080/counter:6
           ports:
-            - containerPort: 80
+            - containerPort: 5000
           volumeMounts:
             - mountPath: "/app/data"
               name: counter-app-data
