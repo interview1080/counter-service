@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: counter-app
-          image: 105831532584.dkr.ecr.eu-central-1.amazonaws.com/counter-repo:latest
+          image: interview1080/counter:6
           ports:
             - containerPort: 80
           volumeMounts:
