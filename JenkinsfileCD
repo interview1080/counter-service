@@ -12,9 +12,9 @@ pipeline {
             stage('Kubernetes deployment') {
                 steps {
                     withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'kubeconfig', namespace: '', serverUrl: '') {
-                        sh 'kubectl apply -f k8s/counter-app-pvc.yaml'
-                        sh 'kubectl apply -f k8s/counter-app-deployment.yaml'
-                        sh 'kubectl apply -f k8s/counter-app-service.yaml'
+                        sh '/usr/local/bin/kubectl apply -f k8s/counter-app-pvc.yaml'
+                        sh '/usr/local/bin/kubectl apply -f k8s/counter-app-deployment.yaml'
+                        sh '/usr/local/bin/kubectl apply -f k8s/counter-app-service.yaml'
                     }
                 }
             }
